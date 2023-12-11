@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +26,7 @@ public class CounselingService {
      * @return Counseling
      */
     public Counseling createCounseling(CounselingRequest counselingRequest) {
-        if (!this.studentService.isExistStudentById(counselingRequest.getStudentId())) {
+        if (this.studentService.findById(counselingRequest.getStudentId()) == null) {
             throw new EntityNotFoundException("존재하지 않는 학생입니다.");
         }
         Counseling counseling = Counseling.builder()
@@ -58,11 +57,11 @@ public class CounselingService {
         return counselingRepository.save(counseling);
     }
 
-    public Counseling getCounseling(UUID id) {
+    public Counseling getCounseling(int id) {
         return counselingRepository.findById(id);
     }
 
-    public Counseling getCounseling(UUID id, UUID counselorId) {
+    public Counseling getCounseling(int id, int counselorId) {
         if (employeeService.findById(counselorId) == null) {
             throw new EntityNotFoundException("존재하지 않는 직원 아이디 입니다.");
         }

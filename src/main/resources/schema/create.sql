@@ -8,11 +8,12 @@ FLUSH PRIVILEGES;
  */
 CREATE TABLE student_counseling_system.counseling
 (
-    `id`        BINARY(16) DEFAULT (UUID_TO_BIN(UUID(),1)) PRIMARY KEY,
-    student_id   BINARY(16),
-    content     VARCHAR(1000),
-    counselor_id BINARY(16),
-    feedback    VARCHAR(1000),
+--     `id`        BINARY(16) DEFAULT (UUID_TO_BIN(UUID(),1)) PRIMARY KEY,
+    `id`         INT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    student_id   INT,
+    content      VARCHAR(1000),
+    counselor_id INT,
+    feedback     VARCHAR(1000),
     is_read      BOOLEAN,
     created_date DATETIME NOT NULL
 ) ENGINE = INNODB
@@ -24,7 +25,8 @@ CREATE TABLE student_counseling_system.counseling
  */
 CREATE TABLE student_counseling_system.student
 (
-    `id`     BINARY(16) DEFAULT (UUID_TO_BIN(UUID(),1)) PRIMARY KEY,
+--     `id`     BINARY(16) DEFAULT (UUID_TO_BIN(UUID(),1)) PRIMARY KEY,
+    `id`     INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `name`   VARCHAR(1000),
     `status` CHAR(1)
 ) ENGINE = INNODB
@@ -37,7 +39,8 @@ CREATE TABLE student_counseling_system.student
  */
 CREATE TABLE student_counseling_system.employee
 (
-    `id`     BINARY(16) DEFAULT (UUID_TO_BIN(UUID(),1)) PRIMARY KEY,
+--     `id`     BINARY(16) DEFAULT (UUID_TO_BIN(UUID(),1)) PRIMARY KEY,
+    `id`     INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `name`   VARCHAR(1000),
     `type`   CHAR(1),
     `status` CHAR(1)

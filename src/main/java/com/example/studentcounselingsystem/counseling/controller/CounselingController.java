@@ -27,8 +27,8 @@ public class CounselingController {
     }
 
     @GetMapping("counseling/{id}")
-    public ResponseEntity<Counseling> getCounseling(@PathVariable() UUID id,
-                                                    @RequestParam(required = false) UUID counselorId) {
+    public ResponseEntity<Counseling> getCounseling(@PathVariable() int id,
+                                                    @RequestParam(required = false) Integer counselorId) {
         if (counselorId == null) {
             return ResponseEntity.ok(counselingService.getCounseling(id));
         }

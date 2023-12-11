@@ -16,14 +16,14 @@ import java.util.UUID;
 public class Counseling {
     @Id
     @Column
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int id;
     @Column
-    private UUID studentId;
+    private int studentId;
     @Column
     private String content;
     @Column
-    private UUID counselorId;
+    private int counselorId;
     @Column
     private String feedback;
     @Column

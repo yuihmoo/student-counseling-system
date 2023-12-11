@@ -15,8 +15,8 @@ import java.util.UUID;
 public class Employee {
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @Column
     private String name;
     @Column

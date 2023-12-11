@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.UUID;
 
 public interface StudentRepository extends CrudRepository<Student, Long> {
-    boolean existsById(UUID id);
+    Student findById(int id);
 }

@@ -12,7 +12,7 @@ import java.util.UUID;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public Employee findById(UUID id) {
+    public Employee findById(int id) {
         return employeeRepository.findById(id);
     }
 }

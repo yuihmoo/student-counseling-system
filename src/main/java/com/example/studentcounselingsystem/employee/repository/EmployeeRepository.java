@@ -6,5 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.UUID;
 
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
-    Employee findById(UUID id);
+//    @Query(value = "SELECT id, name, type, status FROM employee WHERE id = UUID_TO_BIN(:id, 1)", nativeQuery = true)
+    Employee findById(int id);
 }

@@ -1,5 +1,6 @@
 package com.example.studentcounselingsystem.student.service;
 
+import com.example.studentcounselingsystem.student.entity.Student;
 import com.example.studentcounselingsystem.student.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class StudentService {
      * @param studentId: 학생 ID
      * @return boolean
      */
-    public boolean isExistStudentById(UUID studentId) {
-        return studentRepository.existsById(studentId);
+    public Student findById(int studentId) {
+        return studentRepository.findById(studentId);
     }
 }
