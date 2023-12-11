@@ -35,6 +35,11 @@ public class GlobalExceptionHandler {
                 .body(new CustomErrorResponse(Objects.requireNonNull(methodArgumentNotValidException.getFieldError()).getDefaultMessage()));
     }
 
+    /**
+     * 이미 등록된 피드백으로 발생한 Exception 핸들링
+     * @param alreadyCreatedFeedbackException
+     * @return
+     */
     @ExceptionHandler(AlreadyCreatedFeedbackException.class)
     protected ResponseEntity<CustomErrorResponse> handleAlreadyCreatedFeedbackException(AlreadyCreatedFeedbackException alreadyCreatedFeedbackException) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
