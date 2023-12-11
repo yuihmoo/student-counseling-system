@@ -1,6 +1,7 @@
 package com.example.studentcounselingsystem.common.exception;
 
 import com.example.studentcounselingsystem.common.dto.response.CustomErrorResponse;
+import com.example.studentcounselingsystem.counseling.exception.AlreadyCreatedFeedbackException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +33,11 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<CustomErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException methodArgumentNotValidException) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new CustomErrorResponse(Objects.requireNonNull(methodArgumentNotValidException.getFieldError()).getDefaultMessage()));
+    }
+
+    @ExceptionHandler(AlreadyCreatedFeedbackException.class)
+    protected ResponseEntity<CustomErrorResponse> handleAlreadyCreatedFeedbackException(AlreadyCreatedFeedbackException alreadyCreatedFeedbackException) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new CustomErrorResponse(alreadyCreatedFeedbackException.getMessage()));
     }
 }
