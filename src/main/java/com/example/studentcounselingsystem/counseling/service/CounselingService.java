@@ -5,13 +5,13 @@ import com.example.studentcounselingsystem.counseling.dto.request.FeedbackReques
 import com.example.studentcounselingsystem.counseling.entity.Counseling;
 import com.example.studentcounselingsystem.counseling.exception.AlreadyCreatedFeedbackException;
 import com.example.studentcounselingsystem.counseling.repository.CounselingRepository;
-import com.example.studentcounselingsystem.employee.service.EmployeeService;
 import com.example.studentcounselingsystem.student.service.StudentService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -52,6 +52,17 @@ public class CounselingService {
         counseling.setCounselorId(feedbackRequest.getCounselorId());
         counseling.setFeedback(feedbackRequest.getFeedback());
         // 피드백이 등록 되었다면 IsRead 값이 True 일 수 밖에 없음
+        counseling.setIsRead(true);
+        return counselingRepository.save(counseling);
+    }
+
+    public Counseling getCounseling(UUID id) {
+//        UUID uuid = UUID.fromString(id);
+        return counselingRepository.findById(id);
+    }
+
+    public Counseling getCounseling(UUID id, UUID counselorId) {
+        Counseling counseling = counselingRepository.findById(id);
         counseling.setIsRead(true);
         return counselingRepository.save(counseling);
     }

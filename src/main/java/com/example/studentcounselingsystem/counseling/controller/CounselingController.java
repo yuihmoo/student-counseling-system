@@ -1,4 +1,4 @@
-package com.example.studentcounselingsystem.counseling;
+package com.example.studentcounselingsystem.counseling.controller;
 
 import com.example.studentcounselingsystem.counseling.dto.request.CounselingRequest;
 import com.example.studentcounselingsystem.counseling.dto.request.FeedbackRequest;
@@ -7,9 +7,9 @@ import com.example.studentcounselingsystem.counseling.service.CounselingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,5 +24,14 @@ public class CounselingController {
     @PostMapping("counseling/feedback")
     public ResponseEntity<Counseling> updateCounselingFeedback(@Valid @RequestBody FeedbackRequest feedbackRequest) {
         return ResponseEntity.ok(counselingService.updateFeedback(feedbackRequest));
+    }
+
+    @GetMapping("counseling/{id}")
+    public ResponseEntity<Counseling> getCounseling(@PathVariable() UUID id,
+                                                    @RequestParam(required = false) UUID counselorId) {
+        if (counselorId == null) {
+            return ResponseEntity.ok(counselingService.getCounseling(id));
+        }
+        return ResponseEntity.ok(counselingService.getCounseling(id, counselorId));
     }
 }
