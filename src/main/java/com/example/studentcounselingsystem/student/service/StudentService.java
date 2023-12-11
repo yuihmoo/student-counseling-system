@@ -11,6 +11,11 @@ import java.util.UUID;
 public class StudentService {
     private final StudentRepository studentRepository;
 
+    /**
+     * 학생 ID로 학생 존재 여부 판단
+     * @param studentId: 학생 ID
+     * @return boolean
+     */
     public boolean isExistStudentById(UUID studentId) {
         return studentRepository.existsById(studentId);
     }

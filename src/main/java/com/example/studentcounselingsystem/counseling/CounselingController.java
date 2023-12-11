@@ -3,6 +3,7 @@ package com.example.studentcounselingsystem.counseling;
 import com.example.studentcounselingsystem.counseling.dto.request.CounselingRequest;
 import com.example.studentcounselingsystem.counseling.entity.Counseling;
 import com.example.studentcounselingsystem.counseling.service.CounselingService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ public class CounselingController {
     private final CounselingService counselingService;
 
     @PostMapping("counseling")
-    public ResponseEntity<Counseling> createCounseling(@RequestBody CounselingRequest counselingRequest) {
+    public ResponseEntity<Counseling> createCounseling(@Valid @RequestBody CounselingRequest counselingRequest) {
         return ResponseEntity.ok(counselingService.createCounseling(counselingRequest));
     }
 }

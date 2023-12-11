@@ -17,8 +17,13 @@ public class CounselingService {
     private final CounselingRepository counselingRepository;
     private final StudentService studentService;
 
+    /**
+     * 상담 내역을 등록
+     * @param counselingRequest: 상담 DTO
+     * @return Counseling
+     */
     public Counseling createCounseling(CounselingRequest counselingRequest) {
-        if (!this.isExistStudentById(counselingRequest.getStudentId())) {
+        if (!this.studentService.isExistStudentById(counselingRequest.getStudentId())) {
             throw new EntityNotFoundException("존재하지 않는 학생입니다.");
         }
         Counseling counseling = Counseling.builder()
@@ -27,9 +32,5 @@ public class CounselingService {
                 .createdDate(LocalDateTime.now())
                 .build();
         return counselingRepository.save(counseling);
-    }
-
-    public boolean isExistStudentById(UUID studentId) {
-        return studentService.isExistStudentById(studentId);
     }
 }
