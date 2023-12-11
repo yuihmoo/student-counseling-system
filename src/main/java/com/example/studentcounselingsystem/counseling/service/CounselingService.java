@@ -5,6 +5,7 @@ import com.example.studentcounselingsystem.counseling.dto.request.FeedbackReques
 import com.example.studentcounselingsystem.counseling.entity.Counseling;
 import com.example.studentcounselingsystem.counseling.exception.AlreadyCreatedFeedbackException;
 import com.example.studentcounselingsystem.counseling.repository.CounselingRepository;
+import com.example.studentcounselingsystem.employee.service.EmployeeService;
 import com.example.studentcounselingsystem.student.service.StudentService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.UUID;
 public class CounselingService {
     private final CounselingRepository counselingRepository;
     private final StudentService studentService;
+    private final EmployeeService employeeService;
 
     /**
      * 상담 내역을 등록
@@ -57,11 +59,13 @@ public class CounselingService {
     }
 
     public Counseling getCounseling(UUID id) {
-//        UUID uuid = UUID.fromString(id);
         return counselingRepository.findById(id);
     }
 
     public Counseling getCounseling(UUID id, UUID counselorId) {
+        if (employeeService.findById(counselorId) == null) {
+            throw new EntityNotFoundException("존재하지 않는 직원 아이디 입니다.");
+        }
         Counseling counseling = counselingRepository.findById(id);
         counseling.setIsRead(true);
         return counselingRepository.save(counseling);
