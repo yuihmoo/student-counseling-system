@@ -9,12 +9,12 @@ FLUSH PRIVILEGES;
 CREATE TABLE student_counseling_system.counseling
 (
     `id`        BINARY(16) DEFAULT (UUID_TO_BIN(UUID(),1)) PRIMARY KEY,
-    studentId   BINARY(16),
+    student_id   BINARY(16),
     content     VARCHAR(1000),
-    counselorId BINARY(16),
+    counselor_id BINARY(16),
     feedback    VARCHAR(1000),
-    isRead      BOOLEAN,
-    createdDate TIMESTAMP
+    is_read      BOOLEAN,
+    created_date DATETIME NOT NULL
 ) ENGINE = INNODB
   DEFAULT CHARSET = utf8mb4;
 
