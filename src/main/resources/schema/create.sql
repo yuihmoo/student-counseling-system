@@ -1,6 +1,6 @@
 CREATE DATABASE `student_counseling_system`;
-CREATE USER 'yuihmoo'@'192.168.%.1' IDENTIFIED BY 'ZHlkZWhmMTI=';
-GRANT ALL PRIVILEGES ON student_counseling_system.* TO 'yuihmoo'@'192.168.%.1';
+CREATE USER 'yuihmoo'@'%' IDENTIFIED BY 'ZHlkZWhmMTI=';
+GRANT ALL PRIVILEGES ON student_counseling_system.* TO 'yuihmoo'@'%';
 FLUSH PRIVILEGES;
 
 /*
@@ -9,13 +9,13 @@ FLUSH PRIVILEGES;
 CREATE TABLE student_counseling_system.counseling
 (
 --     `id`        BINARY(16) DEFAULT (UUID_TO_BIN(UUID(),1)) PRIMARY KEY,
-    `id`         INT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    student_id   INT,
-    content      VARCHAR(1000),
-    counselor_id INT,
-    feedback     VARCHAR(1000),
-    is_read      BOOLEAN,
-    created_date DATETIME NOT NULL
+    `id`          INT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    student_id    INT      NOT NULL,
+    content       VARCHAR(1000),
+    counselor_id  INT DEFAULT NULL,
+    feedback      VARCHAR(1000),
+    is_read       BOOLEAN,
+    created_date  DATETIME NOT NULL
 ) ENGINE = INNODB
   DEFAULT CHARSET = utf8mb4;
 
