@@ -34,6 +34,7 @@ public class CounselingService {
      * @param createCounselingRequest 상담 DTO
      * @return Counseling
      */
+    @Transactional
     public Counseling createCounseling(CreateCounselingRequest createCounselingRequest) {
         if (this.studentService.getStudentById(createCounselingRequest.getStudentId()) == null) {
             throw new EntityNotFoundException("존재하지 않는 학생입니다.");
