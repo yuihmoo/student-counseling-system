@@ -1,9 +1,9 @@
 package com.example.studentcounselingsystem.counseling.exception;
 
-public class AlreadyCreatedFeedbackException extends RuntimeException {
+public class AlreadyUpdatedFeedbackException extends RuntimeException {
     private final String message;
 
-    public AlreadyCreatedFeedbackException(String message) {
+    public AlreadyUpdatedFeedbackException(String message) {
         this.message = message;
     }
 
