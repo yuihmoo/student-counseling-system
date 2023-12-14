@@ -17,11 +17,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class CounselingService {
     private final CounselingRepository counselingRepository;
     private final StudentService studentService;
@@ -33,7 +35,7 @@ public class CounselingService {
      * @return Counseling
      */
     public Counseling createCounseling(CreateCounselingRequest createCounselingRequest) {
-        if (this.studentService.findById(createCounselingRequest.getStudentId()) == null) {
+        if (this.studentService.getStudentById(createCounselingRequest.getStudentId()) == null) {
             throw new EntityNotFoundException("존재하지 않는 학생입니다.");
         }
         Counseling counseling = Counseling.builder()
@@ -49,6 +51,7 @@ public class CounselingService {
      * @param createFeedbackRequest 피드백 DTO
      * @return Counseling
      */
+    @Transactional
     public Counseling updateFeedback(CreateFeedbackRequest createFeedbackRequest, int id) {
         Counseling counseling = this.counselingRepository.findById(id);
         if (counseling == null) {
@@ -69,6 +72,7 @@ public class CounselingService {
      * @param id 상담 아이디
      * @return 상담
      */
+    @Transactional
     public Counseling getCounseling(int id) {
         return counselingRepository.findById(id);
     }
@@ -79,8 +83,9 @@ public class CounselingService {
      * @param employeeId 담당자 아이디
      * @return 상담
      */
+    @Transactional
     public Counseling getCounseling(int id, int employeeId) {
-        if (employeeService.findById(employeeId) == null) {
+        if (employeeService.getEmployeeById(employeeId) == null) {
             throw new EntityNotFoundException("존재하지 않는 담당자 아이디 입니다.");
         }
         Counseling counseling = counselingRepository.findById(id);
@@ -96,6 +101,7 @@ public class CounselingService {
      * @param counselingSearchRequest 상담 검색 옵션 DTO
      * @return 상담 목록
      */
+    @Transactional
     public PageCounselingResponse getCounselingList(int pageNo, String criteria, String sort, CounselingSearchRequest counselingSearchRequest) {
         // 페이지 네이션 선언
         Pageable pageable = (sort.equals("ASC")) ?

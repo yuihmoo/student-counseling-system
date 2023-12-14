@@ -4,11 +4,11 @@ import com.example.studentcounselingsystem.student.entity.Student;
 import com.example.studentcounselingsystem.student.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class StudentService {
     private final StudentRepository studentRepository;
 
@@ -17,7 +17,8 @@ public class StudentService {
      * @param studentId: 학생 ID
      * @return boolean
      */
-    public Student findById(int studentId) {
+    @Transactional
+    public Student getStudentById(int studentId) {
         return studentRepository.findById(studentId);
     }
 }
