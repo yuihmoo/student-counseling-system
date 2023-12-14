@@ -26,7 +26,7 @@ public class Counseling {
     @Column
     private String feedback;
     @Column
-    private boolean isRead = false;
+    private boolean isRead;
     @Column
     private LocalDateTime createdDate;
 
