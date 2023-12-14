@@ -1,7 +1,7 @@
 package com.example.studentcounselingsystem.common.exception;
 
 import com.example.studentcounselingsystem.common.dto.response.CustomErrorResponse;
-import com.example.studentcounselingsystem.counseling.exception.AlreadyCreatedFeedbackException;
+import com.example.studentcounselingsystem.counseling.exception.AlreadyUpdatedFeedbackException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,12 +37,12 @@ public class GlobalExceptionHandler {
 
     /**
      * 이미 등록된 피드백으로 발생한 Exception 핸들링
-     * @param alreadyCreatedFeedbackException 이미 등록된 피드백으로 발생한 Exception
+     * @param alreadyUpdatedFeedbackException 이미 등록된 피드백으로 발생한 Exception
      * @return ResponseEntity<CustomErrorResponse>
      */
-    @ExceptionHandler(AlreadyCreatedFeedbackException.class)
-    protected ResponseEntity<CustomErrorResponse> handleAlreadyCreatedFeedbackException(AlreadyCreatedFeedbackException alreadyCreatedFeedbackException) {
+    @ExceptionHandler(AlreadyUpdatedFeedbackException.class)
+    protected ResponseEntity<CustomErrorResponse> handleAlreadyCreatedFeedbackException(AlreadyUpdatedFeedbackException alreadyUpdatedFeedbackException) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new CustomErrorResponse(alreadyCreatedFeedbackException.getMessage()));
+                .body(new CustomErrorResponse(alreadyUpdatedFeedbackException.getMessage()));
     }
 }

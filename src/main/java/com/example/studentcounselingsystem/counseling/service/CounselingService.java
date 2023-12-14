@@ -2,10 +2,10 @@ package com.example.studentcounselingsystem.counseling.service;
 
 import com.example.studentcounselingsystem.counseling.dto.request.CreateCounselingRequest;
 import com.example.studentcounselingsystem.counseling.dto.request.CounselingSearchRequest;
-import com.example.studentcounselingsystem.counseling.dto.request.CreateFeedbackRequest;
+import com.example.studentcounselingsystem.counseling.dto.request.UpdateFeedbackRequest;
 import com.example.studentcounselingsystem.counseling.dto.response.PageCounselingResponse;
 import com.example.studentcounselingsystem.counseling.entity.Counseling;
-import com.example.studentcounselingsystem.counseling.exception.AlreadyCreatedFeedbackException;
+import com.example.studentcounselingsystem.counseling.exception.AlreadyUpdatedFeedbackException;
 import com.example.studentcounselingsystem.counseling.repository.CounselingRepository;
 import com.example.studentcounselingsystem.counseling.repository.CounselingSpecs;
 import com.example.studentcounselingsystem.employee.service.EmployeeService;
@@ -49,20 +49,20 @@ public class CounselingService {
 
     /**
      * 해당 상담의 피드백 등록
-     * @param createFeedbackRequest 피드백 DTO
+     * @param updateFeedbackRequest 피드백 DTO
      * @return Counseling
      */
     @Transactional
-    public Counseling updateFeedback(CreateFeedbackRequest createFeedbackRequest, int id) {
+    public Counseling updateFeedback(UpdateFeedbackRequest updateFeedbackRequest, int id) {
         Counseling counseling = this.counselingRepository.findById(id);
         if (counseling == null) {
             throw new EntityNotFoundException("존재하지 않는 상담입니다.");
         }
         if (counseling.getFeedback() != null) {
-            throw new AlreadyCreatedFeedbackException("이미 처리된 피드백 입니다.");
+            throw new AlreadyUpdatedFeedbackException("이미 처리된 피드백 입니다.");
         }
-        counseling.setEmployeeId(createFeedbackRequest.getEmployeeId());
-        counseling.setFeedback(createFeedbackRequest.getFeedback());
+        counseling.setEmployeeId(updateFeedbackRequest.getEmployeeId());
+        counseling.setFeedback(updateFeedbackRequest.getFeedback());
         // 피드백이 등록 되었다면 IsRead 값이 True 일 수 밖에 없음
         counseling.setIsRead(true);
         return counselingRepository.save(counseling);
@@ -86,6 +86,7 @@ public class CounselingService {
      */
     @Transactional
     public Counseling getCounseling(int id, int employeeId) {
+        // todo: 담당자 ID 검증 관련해서 비지니스 로직 재 검토 필요
         if (employeeService.getEmployeeById(employeeId) == null) {
             throw new EntityNotFoundException("존재하지 않는 담당자 아이디 입니다.");
         }

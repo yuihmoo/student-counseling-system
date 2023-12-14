@@ -3,10 +3,14 @@ package com.example.studentcounselingsystem.counseling.dto.request;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "상담 등록 DTO")
 public class CreateCounselingRequest {
     @Schema(description = "학생 아이디", example = "1")

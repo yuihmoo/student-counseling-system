@@ -3,7 +3,7 @@ package com.example.studentcounselingsystem.counseling.controller;
 import com.example.studentcounselingsystem.common.dto.response.CustomErrorResponse;
 import com.example.studentcounselingsystem.counseling.dto.request.CreateCounselingRequest;
 import com.example.studentcounselingsystem.counseling.dto.request.CounselingSearchRequest;
-import com.example.studentcounselingsystem.counseling.dto.request.CreateFeedbackRequest;
+import com.example.studentcounselingsystem.counseling.dto.request.UpdateFeedbackRequest;
 import com.example.studentcounselingsystem.counseling.dto.response.PageCounselingResponse;
 import com.example.studentcounselingsystem.counseling.entity.Counseling;
 import com.example.studentcounselingsystem.counseling.service.CounselingService;
@@ -49,8 +49,8 @@ public class CounselingController {
     @PostMapping("counseling/{id}/feedback")
     public ResponseEntity<Counseling> updateCounselingFeedback(
             @PathVariable() @Parameter(description = "상담 아이디", example = "1") int id,
-            @Valid @RequestBody CreateFeedbackRequest createFeedbackRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(counselingService.updateFeedback(createFeedbackRequest, id));
+            @Valid @RequestBody UpdateFeedbackRequest updateFeedbackRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(counselingService.updateFeedback(updateFeedbackRequest, id));
     }
 
     @Operation(operationId = "createCounseling", summary = "상담 조회", description = "상담 상세 조회 API", tags = {
