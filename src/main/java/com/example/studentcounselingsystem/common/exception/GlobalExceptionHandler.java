@@ -16,8 +16,8 @@ public class GlobalExceptionHandler {
 
     /**
      * 리소스 존재 여부 확인 시 발생하는 Exception 핸들링
-     * @param entityNotFoundException
-     * @return
+     * @param entityNotFoundException 엔티티가 존재하지 않을 때 발생하는 Exception
+     * @return ResponseEntity<CustomErrorResponse>
      */
     @ExceptionHandler(EntityNotFoundException.class)
     protected ResponseEntity<CustomErrorResponse> handleEntityNotFoundException(EntityNotFoundException entityNotFoundException) {
@@ -26,8 +26,8 @@ public class GlobalExceptionHandler {
 
     /**
      * DTO validator 를 통해 발생한 Exception 핸들링
-     * @param methodArgumentNotValidException
-     * @return
+     * @param methodArgumentNotValidException DTO Validation 도중 발생하는 Exception
+     * @return ResponseEntity<CustomErrorResponse>
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<CustomErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException methodArgumentNotValidException) {
@@ -37,8 +37,8 @@ public class GlobalExceptionHandler {
 
     /**
      * 이미 등록된 피드백으로 발생한 Exception 핸들링
-     * @param alreadyCreatedFeedbackException
-     * @return
+     * @param alreadyCreatedFeedbackException 이미 등록된 피드백으로 발생한 Exception
+     * @return ResponseEntity<CustomErrorResponse>
      */
     @ExceptionHandler(AlreadyCreatedFeedbackException.class)
     protected ResponseEntity<CustomErrorResponse> handleAlreadyCreatedFeedbackException(AlreadyCreatedFeedbackException alreadyCreatedFeedbackException) {
