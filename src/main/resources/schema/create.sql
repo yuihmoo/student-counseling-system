@@ -12,7 +12,7 @@ CREATE TABLE student_counseling_system.counseling
     `id`          INT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
     student_id    INT      NOT NULL,
     content       VARCHAR(1000),
-    counselor_id  INT DEFAULT NULL,
+    employee_id  INT DEFAULT NULL,
     feedback      VARCHAR(1000),
     is_read       BOOLEAN,
     created_date  DATETIME NOT NULL

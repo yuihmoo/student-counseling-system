@@ -1,6 +1,7 @@
 package com.example.studentcounselingsystem.counseling.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import org.hibernate.validator.constraints.Length;
@@ -9,7 +10,7 @@ import org.hibernate.validator.constraints.Length;
 @Schema(description = "상담 등록 DTO")
 public class CreateCounselingRequest {
     @Schema(description = "학생 아이디", example = "1")
-    @NotEmpty()
+    @Min(value = 1, message = "학생 아이디 값을 다시 확인해주세요.")
     private int studentId;
     @Schema(description = "상담 내용", example = "string", minLength = 50, maxLength = 1000)
     @NotEmpty()

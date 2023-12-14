@@ -62,11 +62,11 @@ public class CounselingController {
     @GetMapping("counseling/{id}")
     public ResponseEntity<Counseling> getCounseling(
             @PathVariable() @Parameter(description = "상담 아이디", example = "1") int id,
-            @RequestParam(required = false) @Parameter(description = "담당자 아이디", example = "1") Integer counselorId) {
-        if (counselorId == null) {
+            @RequestParam(required = false) @Parameter(description = "담당자 아이디", example = "1") Integer employeeId) {
+        if (employeeId == null) {
             return ResponseEntity.ok(counselingService.getCounseling(id));
         }
-        return ResponseEntity.ok(counselingService.getCounseling(id, counselorId));
+        return ResponseEntity.ok(counselingService.getCounseling(id, employeeId));
     }
 
     @Operation(operationId = "createCounseling", summary = "상담 목록 조회", description = "상담 목록을 조건별로 조회 API", tags = {

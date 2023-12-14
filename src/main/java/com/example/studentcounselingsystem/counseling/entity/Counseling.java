@@ -22,7 +22,7 @@ public class Counseling {
     @Column
     private String content;
     @Column
-    private int counselorId;
+    private int employeeId;
     @Column
     private String feedback;
     @Column

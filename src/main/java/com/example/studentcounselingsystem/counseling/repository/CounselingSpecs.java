@@ -7,8 +7,8 @@ public class CounselingSpecs {
     public static Specification<Counseling> withStudentId(final Integer id) {
         return (root, query, cb) -> cb.equal(root.get("studentId"), id);
     }
-    public static Specification<Counseling> withCounselorId(final Integer id) {
-        return (root, query, cb) -> cb.equal(root.get("counselorId"), id);
+    public static Specification<Counseling> withEmployeeId(final Integer id) {
+        return (root, query, cb) -> cb.equal(root.get("employeeId"), id);
     }
     public static Specification<Counseling> withIsRead(final Boolean isRead) {
         return (root, query, cb) -> cb.equal(root.get("isRead"), isRead);

@@ -57,7 +57,7 @@ public class CounselingService {
         if (counseling.getFeedback() != null) {
             throw new AlreadyCreatedFeedbackException("이미 처리된 피드백 입니다.");
         }
-        counseling.setCounselorId(createFeedbackRequest.getCounselorId());
+        counseling.setEmployeeId(createFeedbackRequest.getEmployeeId());
         counseling.setFeedback(createFeedbackRequest.getFeedback());
         // 피드백이 등록 되었다면 IsRead 값이 True 일 수 밖에 없음
         counseling.setIsRead(true);
@@ -76,11 +76,11 @@ public class CounselingService {
     /**
      * 상담 상세 조회(담당자 ID 포함)
      * @param id 상담 아이디
-     * @param counselorId 담당자 아이디
+     * @param employeeId 담당자 아이디
      * @return 상담
      */
-    public Counseling getCounseling(int id, int counselorId) {
-        if (employeeService.findById(counselorId) == null) {
+    public Counseling getCounseling(int id, int employeeId) {
+        if (employeeService.findById(employeeId) == null) {
             throw new EntityNotFoundException("존재하지 않는 담당자 아이디 입니다.");
         }
         Counseling counseling = counselingRepository.findById(id);
@@ -107,8 +107,8 @@ public class CounselingService {
         if (counselingSearchRequest.getStudentId() != null) {
             spec = spec.and(CounselingSpecs.withStudentId(counselingSearchRequest.getStudentId()));
         }
-        if (counselingSearchRequest.getCounselorId() != null) {
-            spec = spec.and(CounselingSpecs.withCounselorId(counselingSearchRequest.getCounselorId()));
+        if (counselingSearchRequest.getEmployeeId() != null) {
+            spec = spec.and(CounselingSpecs.withEmployeeId(counselingSearchRequest.getEmployeeId()));
         }
         if (counselingSearchRequest.getIsRead() != null) {
             spec = spec.and(CounselingSpecs.withIsRead(counselingSearchRequest.getIsRead()));
