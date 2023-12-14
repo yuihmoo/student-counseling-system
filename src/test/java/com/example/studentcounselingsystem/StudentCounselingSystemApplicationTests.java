@@ -8,8 +8,7 @@ import com.example.studentcounselingsystem.counseling.entity.Counseling;
 import com.example.studentcounselingsystem.counseling.exception.AlreadyUpdatedFeedbackException;
 import com.example.studentcounselingsystem.counseling.service.CounselingService;
 import jakarta.persistence.EntityNotFoundException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StudentCounselingSystemApplicationTests {
     @Autowired
     private CounselingService counselingService;
@@ -28,6 +28,7 @@ class StudentCounselingSystemApplicationTests {
     }
 
     @Test
+    @Order(1)
     @DisplayName("Counseling-create-1: 상담 등록 성공")
     void createCounseling() {
         CreateCounselingRequest counselingRequest = new CreateCounselingRequest(1,
@@ -41,6 +42,7 @@ class StudentCounselingSystemApplicationTests {
     }
 
     @Test
+    @Order(2)
     @DisplayName("Counseling-create-2: 잘못된 학생 아이디")
     void createCounselingWithWrongStudentId() {
         CreateCounselingRequest counselingRequest = new CreateCounselingRequest(0,
@@ -50,6 +52,7 @@ class StudentCounselingSystemApplicationTests {
     }
 
     @Test
+    @Order(3)
     @DisplayName("Counseling-feedback-update-1: 상담 피드백 등록 성공")
     void updateFeedback() {
         UpdateFeedbackRequest updateFeedbackRequest = new UpdateFeedbackRequest(1,
@@ -61,6 +64,7 @@ class StudentCounselingSystemApplicationTests {
     }
 
     @Test
+    @Order(4)
     @DisplayName("Counseling-feedback-update-2: 존재하지 않는 상담")
     void createCounselingWithWrongCounselingId() {
         UpdateFeedbackRequest updateFeedbackRequest = new UpdateFeedbackRequest(1,
@@ -70,6 +74,7 @@ class StudentCounselingSystemApplicationTests {
     }
 
     @Test
+    @Order(5)
     @DisplayName("Counseling-feedback-update-3: 이미 처리된 피드백")
     void createCounselingWithAlreadyUpdated() {
         UpdateFeedbackRequest updateFeedbackRequest = new UpdateFeedbackRequest(1,
@@ -79,6 +84,7 @@ class StudentCounselingSystemApplicationTests {
     }
 
     @Test
+    @Order(6)
     @DisplayName("Counseling-detail-1: 상담 조회 성공")
     void getCounseling() {
         Counseling counseling = counselingService.getCounseling(1);
@@ -91,6 +97,7 @@ class StudentCounselingSystemApplicationTests {
     }
 
     @Test
+    @Order(7)
     @DisplayName("Counseling-detail-2: 상담 조회 성공(담당자 ID 포함)")
     void getCounselingWithEmployeeId() {
         Counseling counseling = counselingService.getCounseling(1, 1);
@@ -103,6 +110,7 @@ class StudentCounselingSystemApplicationTests {
     }
 
     @Test
+    @Order(8)
     @DisplayName("Counseling-detail-3: 존재하지 않는 담당자 아이디")
     void getCounselingWithWrongEmployeeId() {
         Executable executable = () -> counselingService.getCounseling(1, 0);
@@ -110,6 +118,7 @@ class StudentCounselingSystemApplicationTests {
     }
 
     @Test
+    @Order(9)
     @DisplayName("Counseling-list-1: 상담 목록 조회 성공(파라미터 없음)")
     void getCounselingList() {
         int defaultPageNo = 0;
