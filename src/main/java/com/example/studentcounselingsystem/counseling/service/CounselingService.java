@@ -49,8 +49,8 @@ public class CounselingService {
      * @param feedbackRequest 피드백 DTO
      * @return Counseling
      */
-    public Counseling updateFeedback(FeedbackRequest feedbackRequest) {
-        Counseling counseling = this.counselingRepository.findById(feedbackRequest.getId());
+    public Counseling updateFeedback(FeedbackRequest feedbackRequest, int id) {
+        Counseling counseling = this.counselingRepository.findById(id);
         if (counseling == null) {
             throw new EntityNotFoundException("존재하지 않는 상담입니다.");
         }
