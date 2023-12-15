@@ -122,7 +122,12 @@ public class CounselingService {
             spec = spec.and(CounselingSpecs.withIsRead(counselingSearchRequest.getIsRead()));
         }
         if (counselingSearchRequest.getIsFeedback() != null) {
-            spec = spec.and(CounselingSpecs.withIsFeedback());
+            if (counselingSearchRequest.getIsFeedback()) {
+                spec = spec.and(CounselingSpecs.withIsFeedbackNotNull());
+            }
+            else {
+                spec = spec.and(CounselingSpecs.withIsFeedbackNull());
+            }
         }
         return new PageCounselingResponse(counselingRepository.findAll(spec, pageable));
     }
