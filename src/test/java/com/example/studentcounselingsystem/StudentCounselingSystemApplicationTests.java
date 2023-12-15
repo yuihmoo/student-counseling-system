@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StudentCounselingSystemApplicationTests {
@@ -292,5 +292,10 @@ class StudentCounselingSystemApplicationTests {
         assertEquals(pageCounselingResponse.getContent().get(0).getEmployeeId(), 1);
         assertEquals(pageCounselingResponse.getContent().get(0).getFeedback(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
         assertTrue(pageCounselingResponse.getContent().get(0).getIsRead());
+    }
+
+    @AfterAll
+    void deleteCounseling() {
+        counselingService.deleteCounseling(1);
     }
 }

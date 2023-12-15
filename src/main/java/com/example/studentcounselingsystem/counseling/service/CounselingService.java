@@ -131,4 +131,13 @@ public class CounselingService {
         }
         return new PageCounselingResponse(counselingRepository.findAll(spec, pageable));
     }
+
+    /**
+     * 상담 삭제
+     * @param id 상담 아이디
+     */
+    @Transactional
+    public void deleteCounseling(int id) {
+        counselingRepository.deleteById(id);
+    }
 }

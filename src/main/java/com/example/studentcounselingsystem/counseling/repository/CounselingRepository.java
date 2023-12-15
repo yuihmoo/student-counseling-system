@@ -13,4 +13,5 @@ public interface CounselingRepository extends CrudRepository<Counseling, Long>, 
 //    @Query(value = "SELECT id, student_id, content, counselor_id, feedback, is_read, createdDate FROM counseling WHERE id = UUID_TO_BIN(:id, 1)", nativeQuery = true)
     Counseling findById(int id);
     Page<Counseling> findAll(Specification<Counseling> counselingSpecification, Pageable pageable);
+    void deleteById(int id);
 }
