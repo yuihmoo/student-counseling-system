@@ -133,4 +133,164 @@ class StudentCounselingSystemApplicationTests {
         assertEquals(pageCounselingResponse.getContent().get(0).getFeedback(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
         assertTrue(pageCounselingResponse.getContent().get(0).getIsRead());
     }
+
+    @Test
+    @Order(10)
+    @DisplayName("Counseling-list-2: 상담 목록 조회 성공(오름차순)")
+    void getCounselingListWithASC() {
+        int defaultPageNo = 0;
+        String defaultCriteria = "createdDate";
+        String defaultSort = "ASC";
+        CounselingSearchRequest counselingSearchRequest = new CounselingSearchRequest(null, null, null, null);
+        PageCounselingResponse pageCounselingResponse = counselingService.getCounselingList(defaultPageNo, defaultCriteria, defaultSort, counselingSearchRequest);
+        assertEquals(pageCounselingResponse.getContent().get(0).getId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getStudentId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getContent(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertEquals(pageCounselingResponse.getContent().get(0).getEmployeeId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getFeedback(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertTrue(pageCounselingResponse.getContent().get(0).getIsRead());
+    }
+
+    @Test
+    @Order(11)
+    @DisplayName("Counseling-list-3: 상담 목록 조회 성공(학생 아이디)")
+    void getCounselingListWithStudentId() {
+        int defaultPageNo = 0;
+        String defaultCriteria = "createdDate";
+        String defaultSort = "DESC";
+        CounselingSearchRequest counselingSearchRequest = new CounselingSearchRequest(1, null, null, null);
+        PageCounselingResponse pageCounselingResponse = counselingService.getCounselingList(defaultPageNo, defaultCriteria, defaultSort, counselingSearchRequest);
+        assertEquals(pageCounselingResponse.getContent().get(0).getId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getStudentId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getContent(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertEquals(pageCounselingResponse.getContent().get(0).getEmployeeId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getFeedback(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertTrue(pageCounselingResponse.getContent().get(0).getIsRead());
+    }
+
+    @Test
+    @Order(12)
+    @DisplayName("Counseling-list-4: 상담 목록 조회 성공(담당자 아이디)")
+    void getCounselingListWithEmployeeId() {
+        int defaultPageNo = 0;
+        String defaultCriteria = "createdDate";
+        String defaultSort = "DESC";
+        CounselingSearchRequest counselingSearchRequest = new CounselingSearchRequest(null, 1, null, null);
+        PageCounselingResponse pageCounselingResponse = counselingService.getCounselingList(defaultPageNo, defaultCriteria, defaultSort, counselingSearchRequest);
+        assertEquals(pageCounselingResponse.getContent().get(0).getId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getStudentId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getContent(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertEquals(pageCounselingResponse.getContent().get(0).getEmployeeId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getFeedback(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertTrue(pageCounselingResponse.getContent().get(0).getIsRead());
+    }
+
+    @Test
+    @Order(13)
+    @DisplayName("Counseling-list-5: 상담 목록 조회 성공(읽음 여부 true)")
+    void getCounselingListWithIsReadTrue() {
+        int defaultPageNo = 0;
+        String defaultCriteria = "createdDate";
+        String defaultSort = "DESC";
+        CounselingSearchRequest counselingSearchRequest = new CounselingSearchRequest(null, null, true, null);
+        PageCounselingResponse pageCounselingResponse = counselingService.getCounselingList(defaultPageNo, defaultCriteria, defaultSort, counselingSearchRequest);
+        assertEquals(pageCounselingResponse.getContent().get(0).getId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getStudentId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getContent(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertEquals(pageCounselingResponse.getContent().get(0).getEmployeeId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getFeedback(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertTrue(pageCounselingResponse.getContent().get(0).getIsRead());
+    }
+
+    @Test
+    @Order(14)
+    @DisplayName("Counseling-list-6: 상담 목록 조회 성공(읽음 여부 false)")
+    void getCounselingListWithIsReadFalse() {
+        int defaultPageNo = 0;
+        String defaultCriteria = "createdDate";
+        String defaultSort = "DESC";
+        CounselingSearchRequest counselingSearchRequest = new CounselingSearchRequest(null, null, false, null);
+        PageCounselingResponse pageCounselingResponse = counselingService.getCounselingList(defaultPageNo, defaultCriteria, defaultSort, counselingSearchRequest);
+        assertEquals(pageCounselingResponse.getTotalElements(), 0);
+    }
+
+    @Test
+    @Order(15)
+    @DisplayName("Counseling-list-7: 상담 목록 조회 성공(피드백 여부 true)")
+    void getCounselingListWithIsFeedbackTrue() {
+        int defaultPageNo = 0;
+        String defaultCriteria = "createdDate";
+        String defaultSort = "DESC";
+        CounselingSearchRequest counselingSearchRequest = new CounselingSearchRequest(null, null, null, true);
+        PageCounselingResponse pageCounselingResponse = counselingService.getCounselingList(defaultPageNo, defaultCriteria, defaultSort, counselingSearchRequest);
+        assertEquals(pageCounselingResponse.getContent().get(0).getId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getStudentId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getContent(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertEquals(pageCounselingResponse.getContent().get(0).getEmployeeId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getFeedback(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertTrue(pageCounselingResponse.getContent().get(0).getIsRead());
+    }
+
+    @Test
+    @Order(16)
+    @DisplayName("Counseling-list-8: 상담 목록 조회 성공(피드백 여부 false)")
+    void getCounselingListWithIsFeedbackFalse() {
+        int defaultPageNo = 0;
+        String defaultCriteria = "createdDate";
+        String defaultSort = "DESC";
+        CounselingSearchRequest counselingSearchRequest = new CounselingSearchRequest(null, null, null, false);
+        PageCounselingResponse pageCounselingResponse = counselingService.getCounselingList(defaultPageNo, defaultCriteria, defaultSort, counselingSearchRequest);
+        assertEquals(pageCounselingResponse.getContent().size(), 0);
+    }
+
+    @Test
+    @Order(17)
+    @DisplayName("Counseling-list-9: 상담 목록 조회 성공(학생 아이디, 담당자 아이디)")
+    void getCounselingListWithStudentIdAndEmployeeId() {
+        int defaultPageNo = 0;
+        String defaultCriteria = "createdDate";
+        String defaultSort = "DESC";
+        CounselingSearchRequest counselingSearchRequest = new CounselingSearchRequest(1, 1, null, null);
+        PageCounselingResponse pageCounselingResponse = counselingService.getCounselingList(defaultPageNo, defaultCriteria, defaultSort, counselingSearchRequest);
+        assertEquals(pageCounselingResponse.getContent().get(0).getId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getStudentId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getContent(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertEquals(pageCounselingResponse.getContent().get(0).getEmployeeId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getFeedback(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertTrue(pageCounselingResponse.getContent().get(0).getIsRead());
+    }
+
+    @Test
+    @Order(17)
+    @DisplayName("Counseling-list-10: 상담 목록 조회 성공(학생 아이디, 읽음 여부 true)")
+    void getCounselingListWithStudentIdAndIsReadTrue() {
+        int defaultPageNo = 0;
+        String defaultCriteria = "createdDate";
+        String defaultSort = "DESC";
+        CounselingSearchRequest counselingSearchRequest = new CounselingSearchRequest(1, null, true, null);
+        PageCounselingResponse pageCounselingResponse = counselingService.getCounselingList(defaultPageNo, defaultCriteria, defaultSort, counselingSearchRequest);
+        assertEquals(pageCounselingResponse.getContent().get(0).getId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getStudentId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getContent(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertEquals(pageCounselingResponse.getContent().get(0).getEmployeeId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getFeedback(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertTrue(pageCounselingResponse.getContent().get(0).getIsRead());
+    }
+
+    @Test
+    @Order(18)
+    @DisplayName("Counseling-list-11: 상담 목록 조회 성공(학생 아이디, 피드백 여부 true)")
+    void getCounselingListWithStudentIdAndIsFeedbackTrue() {
+        int defaultPageNo = 0;
+        String defaultCriteria = "createdDate";
+        String defaultSort = "DESC";
+        CounselingSearchRequest counselingSearchRequest = new CounselingSearchRequest(1, null, null, true);
+        PageCounselingResponse pageCounselingResponse = counselingService.getCounselingList(defaultPageNo, defaultCriteria, defaultSort, counselingSearchRequest);
+        assertEquals(pageCounselingResponse.getContent().get(0).getId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getStudentId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getContent(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertEquals(pageCounselingResponse.getContent().get(0).getEmployeeId(), 1);
+        assertEquals(pageCounselingResponse.getContent().get(0).getFeedback(), "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit");
+        assertTrue(pageCounselingResponse.getContent().get(0).getIsRead());
+    }
 }
